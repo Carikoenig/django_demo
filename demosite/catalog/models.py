@@ -15,7 +15,27 @@ class Style(models.Model):
     """Model representing a dance style."""
     # id automatic
     name = models.CharField(max_length=200, help_text='Enter a dance style (e.g. Salsa)')
-    # TODO partner_needed =
+    PARTNER_STRUCTURE = (
+        ('s', 'solo dance'),
+        ('p', 'partnered'),
+    )
+
+    partner_needed = models.CharField(
+        max_length=1,
+        choices=PARTNER_STRUCTURE,
+        blank=True,
+        default='p',
+        help_text='enter whether this is a pair dance with partner (e.g. Ballroom) or a solo dance (e.g. Hip hop)',
+    )
+
+    def __str__(self):
+        """String for representing the Model object."""
+        return self.name
+
+class Language(models.Model):
+    """Model representing a spoken language."""
+    # id automatic
+    name = models.CharField(max_length=200, help_text='Enter a language (e.g. French)')
 
     def __str__(self):
         """String for representing the Model object."""
@@ -103,6 +123,7 @@ class Instructor(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     date_of_birth = models.DateField(null=True, blank=True)
+    speaks_language = models.ManyToManyField(Language, help_text='Select language(s) the instructor can teach in')
 
 
     class Meta:

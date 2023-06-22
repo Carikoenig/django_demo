@@ -105,10 +105,10 @@ class Dance_course_instance(models.Model):
         choices=DAYS,
         blank=True,
         default='mo',
-    help_text=
+        help_text= 'On which day is the course?'
     )
 
-    time = CharField(max_length=5)
+    time = models.CharField(max_length=5, blank=True)
 
     RUN_STATUS = (
         ('f', 'Finished'),

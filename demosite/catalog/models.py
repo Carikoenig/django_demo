@@ -108,7 +108,7 @@ class Dance_course_instance(models.Model):
         help_text= 'On which day is the course?'
     )
 
-    time = models.CharField(max_length=5, blank=True)
+    time = models.CharField(max_length=14, blank=True)
 
     RUN_STATUS = (
         ('f', 'Finished'),
@@ -128,12 +128,25 @@ class Dance_course_instance(models.Model):
 
     # TODO spot,  max_size, attending_students
 
+    def display_instructor(self):
+        """Create a string for the instructor(s) teaching this specific course. This is required to display this in Admin."""
+        return ', '.join(inst.first_name for inst in self.instructor.all()[:3])
+
+        display_instructor.short_description = 'Instructor(s)'
+
+    def display_dancecourse(self):
+        """Create a string for the general dance_course.title that is connected to this specific dance_course_instance. This is required to display this in Admin."""
+        dance_course_title = self.dance_course.title
+        return dance_course_title
+
+        display_dancecourse.short_description = 'Dance course title'
+
     class Meta:
         ordering = ['start_date']
 
     def __str__(self):
         """String for representing the Model object."""
-        return f'{self.id} ({self.book.title})'
+        return f'{self.id} ({self.dance_course.title})'
 
 
 
@@ -144,6 +157,13 @@ class Instructor(models.Model):
     last_name = models.CharField(max_length=100)
     date_of_birth = models.DateField(null=True, blank=True)
     speaks_language = models.ManyToManyField(Language, help_text='Select language(s) the instructor can teach in')
+
+    def display_language(self):
+        """Create a string for the languages spoken by instructor. This is required to display this in Admin."""
+        return ', '.join(language.name for language in self.speaks_language.all()[:3])
+
+        display_language.short_description = 'Language(s)'
+
 
 
     class Meta:

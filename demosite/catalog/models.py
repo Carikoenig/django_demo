@@ -90,6 +90,26 @@ class Dance_course_instance(models.Model):
     dance_course = models.ForeignKey('Dance_course', on_delete=models.RESTRICT, null=True)
     start_date = models.DateField(null=True, blank=True)
 
+    DAYS = (
+        ('mo', 'Monday'),
+        ('tu', 'Tuesday'),
+        ('we', 'Wednesday'),
+        ('th', 'Thursday'),
+        ('fr', 'Friday'),
+        ('sa', 'Saturday'),
+        ('su', 'Sunday'),
+    )
+
+    day = models.CharField(
+        max_length=2,
+        choices=DAYS,
+        blank=True,
+        default='mo',
+    help_text=
+    )
+
+    time = CharField(max_length=5)
+
     RUN_STATUS = (
         ('f', 'Finished'),
         ('o', 'Ongoing currently'),

@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Footloose Home</h1>
+  <p>
+    Welcome to Footloose, a website developed with the help of
+    <em>mdn web docs</em>! <br> Footloose is a student dance association at TU/e Eindhoven university,
+    offering a wide variety of dance courses to its members.
+  </p>
+  <h2>Dynamic content</h2>
+  <p>The associations structure encompasses:</p>
+  <ul>
+    <li><strong>Dance courses:</strong> {{ num_Dance_courses }}</li>
+    <li><strong>Amount of implemented courses since the beginning of the association:</strong> {{ num_Dance_course_instances }}</li>
+    <li><strong>Ongoing courses right now:</strong> {{ num_instances_ongoing }}</li>
+    <li><strong>Dance Instructors:</strong> {{ num_instructors }}</li>
+  </ul>
+{% endblock %}

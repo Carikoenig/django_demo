@@ -32,9 +32,11 @@ urlpatterns += [
     path('catalog/', include('catalog.urls')),
 ]
 
+# commented out bc below same URL pattern gets assigned to smth else now in tutorial
 urlpatterns += [
     path('', RedirectView.as_view(url='catalog/', permanent=True)),
 ]
+
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
@@ -48,3 +50,10 @@ urlpatterns = [
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 """
+
+'''
+# should this maybe rather be in catalog/urls.py
+urlpatterns = [
+    path('', views.index, name='index'),
+]
+'''

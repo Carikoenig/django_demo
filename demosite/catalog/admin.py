@@ -19,7 +19,7 @@ class Dance_course_instanceInline(admin.TabularInline):
 class InstructorAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'date_of_birth', 'display_language')
 
-    fields = [('first_name', 'last_name'), ('date_of_birth', 'speaks_language')]
+    fields = [('first_name', 'last_name'), ('date_of_birth', 'speaks_language'), 'slug']
 
 
 # Register the admin class with the associated model

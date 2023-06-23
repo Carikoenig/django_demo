@@ -37,6 +37,7 @@ def index(request):
 # variable named object_list OR dance_course_list (i.e. generically "<the model name>_list").
 class Dance_courseListView(generic.ListView):
     model = Dance_course
+    paginate_by = 5
     # renders a template expected to be located
     # at /demosite/catalog/templates/catalog/book_list.html
     # location can be overrun by doing the following:
@@ -61,6 +62,7 @@ class Dance_courseListView(generic.ListView):
 
 class Dance_courseDetailView(generic.DetailView):
     model = Dance_course
+    paginate_by = 3
     # Within the html template you can access the dance_course's
     # details with the template variable named object OR dance_course (i.e. generically "the_model_name").
     # canceld since didnt find this renaming:
@@ -86,3 +88,10 @@ def book_detail_view(request, primary_key):
     return render(request, 'catalog/book_detail.html', context={'book': book})
 
 '''
+class InstructorListView(generic.ListView):
+    model = Instructor
+    paginate_by = 10
+
+class InstructorDetailView(generic.DetailView):
+    model = Instructor
+    paginate_by = 10

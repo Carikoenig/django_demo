@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Instructor List</h1>
+  {% if instructor_list %}
+  <!-- if dance_course_list doesn't work try object_list alias --->
+    <ul>
+      {% for inst in instructor_list %}
+      <li>
+        <a href="{{ inst.get_absolute_url }}">{{ inst.first_name }}  {{ inst.last_name}}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no instructors working atm.</p>
+  {% endif %}
+{% endblock %}
+
+<!-- course.get_absolute_url  within the loop Django will also create other variables that you can use to track the iteration. For example, you can test the forloop.last variable to perform conditional processing the last time that the loop is run -->

@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Title: {{ instructor.first_name }} {{instructor.last_name}}{{id}}</h1>
+
+
+<p><strong>Born:</strong> {{ instructor.date_of_birth }}</p>
+<p><strong>Speaks languages:</strong> {{ instructor.speaks_language.all|join:", " }}</p>
+
+{% endblock %}
+
+<!--- # interesting structure for displaying manytomany parameters
+<p><strong>Genre:</strong> {{ book.genre.all|join:", " }}</p>
+-->
+
+<!-- The first interesting thing we haven't seen before is the function
+book.bookinstance_set.all(). This method is "automagically" constructed by
+Django in order to return the set of BookInstance records associated with a particular Book.
+
+{% for copy in book.bookinstance_set.all %}
+ ...
+{% endfor %}
+
+-->

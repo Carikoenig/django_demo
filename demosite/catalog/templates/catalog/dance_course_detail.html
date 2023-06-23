@@ -18,13 +18,13 @@
       <!-- This function is automatically created because Dance_course_instance.running
        is a choices field. Django automatically creates a method get_FOO_display() for every choices
         field "Foo" in a model, which can be used to get the current value of the field.   -->
-      {{ instance.get_status_display }}
+      {{ instance.get_running_display }}
     </p>
-        {% if instance.running != 'o' %}
-          <p><strong>Not running:</strong> {{ instance.start_date }}</p>
-        {% else %}
-             <p><strong>Started:</strong> {{ instance.start_date }}</p>
-        {% endif %}
+    {% if instance.running != 'o' %}
+        <p><strong>Start day:</strong> {{ instance.start_date }}</p>
+    {% else %}
+        <p><strong>Start day:</strong> {{ instance.start_date }}</p>
+    {% endif %}
     <p><strong>Instructor:</strong> {{ instance.instructor.all|join:" , " }}</p>
     <p class="text-muted"><strong>Id:</strong> {{ instance.id }}</p>
   {% endfor %}

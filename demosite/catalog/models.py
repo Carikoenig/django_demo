@@ -157,6 +157,9 @@ class Instructor(models.Model):
     last_name = models.CharField(max_length=100)
     date_of_birth = models.DateField(null=True, blank=True)
     speaks_language = models.ManyToManyField(Language, help_text='Select language(s) the instructor can teach in')
+    slug = models.SlugField(null = True)
+
+
 
     def display_language(self):
         """Create a string for the languages spoken by instructor. This is required to display this in Admin."""
@@ -171,7 +174,7 @@ class Instructor(models.Model):
 
     def get_absolute_url(self):
         """Returns the URL to access a particular instructor instance."""
-        return reverse('instructor-detail', args=[str(self.id)])
+        return reverse('instructor-detail', kwargs={"slug": self.slug})
 
     def __str__(self):
         """String for representing the Model object."""

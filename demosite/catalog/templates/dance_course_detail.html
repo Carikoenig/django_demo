@@ -1,0 +1,43 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Title: {{ dance_course.title }}</h1>
+
+  <p><strong>Summary:</strong> {{ dance_course.summary }}</p>
+  <p><strong>Style:</strong> {{ dance_course.style }}</p>
+  <p><strong>Cost:</strong> {{ dance_course.cost }}</p>
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>Specific Instances</h4>
+
+    {% for instance in dance_course.dance_course_instance_set.all %}
+      <hr />
+      <p
+        class="{% if instance.running == 'o' %}text-success{% elif instance.running == 'f' %}text-danger{% else %}text-warning{% endif %}">
+        <!-- This function is automatically created because Dance_course_instance.running
+         is a choices field. Django automatically creates a method get_FOO_display() for every choices
+          field "Foo" in a model, which can be used to get the current value of the field.   -->
+        {{ instance.get_status_display }}
+      </p>
+      {% if instance.running != 'o' %}
+        <p><strong>Not running right now:</strong> {{ instance.start_date }}</p>
+      {% endif %}
+      <p><strong>Instructor:</strong> {{ instance.instructor.all|join:" , " }}</p>
+      <p class="text-muted"><strong>Id:</strong> {{ instance.id }}</p>
+    {% endfor %}
+  </div>
+{% endblock %}
+
+<!--- # interesting structure for displaying manytomany parameters
+ <p><strong>Genre:</strong> {{ book.genre.all|join:", " }}</p>
+-->
+
+<!-- The first interesting thing we haven't seen before is the function
+ book.bookinstance_set.all(). This method is "automagically" constructed by
+ Django in order to return the set of BookInstance records associated with a particular Book.
+
+ {% for copy in book.bookinstance_set.all %}
+   ...
+ {% endfor %}
+
+-->

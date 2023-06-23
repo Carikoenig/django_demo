@@ -32,7 +32,7 @@ urlpatterns += [
     path('catalog/', include('catalog.urls')),
 ]
 
-# commented out bc below same URL pattern gets assigned to smth else now in tutorial
+
 urlpatterns += [
     path('', RedirectView.as_view(url='catalog/', permanent=True)),
 ]

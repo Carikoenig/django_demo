@@ -1,9 +1,14 @@
 {% extends "base_generic.html" %}
 
+<!-- how to overwrite a block from base_generic.html -->
+{% block title %}
+  <title>Footloose</title>
+{% endblock %}
+
 {% block content %}
-  <h1>Footloose Home</h1>
+  <h1>Footloose: Home</h1>
   <p>
-    Welcome to Footloose, a website developed with the help of
+    Welcome to Footloose, <br> a website developed with the help of
     <em>mdn web docs</em>! <br> Footloose is a student dance association at TU/e Eindhoven university,
     offering a wide variety of dance courses to its members.
   </p>
@@ -14,5 +19,14 @@
     <li><strong>Amount of implemented courses since the beginning of the association:</strong> {{ num_Dance_course_instances }}</li>
     <li><strong>Ongoing courses right now:</strong> {{ num_instances_ongoing }}</li>
     <li><strong>Dance Instructors:</strong> {{ num_instructors }}</li>
+    <li><strong>Styles with letter o in name:</strong>
+        <ul>
+        {% for style in num_styles_with_letter %}
+            <li>
+              {{ style.name }}
+              {{style.partner_needed}}
+            </li>
+            {% endfor %}
+        </ul>
   </ul>
 {% endblock %}

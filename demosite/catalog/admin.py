@@ -21,6 +21,8 @@ class InstructorAdmin(admin.ModelAdmin):
 
     fields = [('first_name', 'last_name'), ('date_of_birth', 'speaks_language'), 'slug']
 
+    prepopulated_fields = {"slug": ("first_name", "last_name",)}
+
 
 # Register the admin class with the associated model
 admin.site.register(Instructor, InstructorAdmin)

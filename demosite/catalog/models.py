@@ -157,7 +157,7 @@ class Instructor(models.Model):
     last_name = models.CharField(max_length=100)
     date_of_birth = models.DateField(null=True, blank=True)
     speaks_language = models.ManyToManyField(Language, help_text='Select language(s) the instructor can teach in')
-    slug = models.SlugField(null = True)
+    slug = models.SlugField(null = False, unique=True)
 
 
 

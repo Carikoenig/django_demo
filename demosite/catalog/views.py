@@ -55,15 +55,16 @@ class Dance_courseListView(generic.ListView):
         # Create any data and add it to the context
         context['some_data'] = 'This is just some data'
         return context'''
-    # Specify your own template name/location
-    template_name = '/demosite/catalog/templates/dance_course_list.html'
+    # Specify your own template name/location...doesnt work apparently?? back to basic folder location then
+    #template_name = '/catalog/templates/dance_course_list.html'
 
 
 class Dance_courseDetailView(generic.DetailView):
     model = Dance_course
     # Within the html template you can access the dance_course's
     # details with the template variable named object OR dance_course (i.e. generically "the_model_name").
-    template_name = '/demosite/catalog/templates/dance_course_detail.html'
+    # canceld since didnt find this renaming:
+    #template_name = '/catalog/templates/catalog/dance_course_detail.html'
 
 
 # doing the detail view and such by hand and not using prebuilt, it would work like this, example:

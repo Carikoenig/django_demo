@@ -7,7 +7,7 @@
     <ul>
       {% for course in dance_course_list %}
       <li>
-        <!--<a href="{{ course.get_absolute_url }}">{{ course.title }}</a>-->
+        <a href="{{ course.get_absolute_url }}">{{ course.title }}</a>
         ({{course.cost}})
       </li>
       {% endfor %}
@@ -17,4 +17,4 @@
   {% endif %}
 {% endblock %}
 
-<!-- within the loop Django will also create other variables that you can use to track the iteration. For example, you can test the forloop.last variable to perform conditional processing the last time that the loop is run -->
+<!-- course.get_absolute_url  within the loop Django will also create other variables that you can use to track the iteration. For example, you can test the forloop.last variable to perform conditional processing the last time that the loop is run -->

@@ -57,3 +57,7 @@ urlpatterns = [
     path('', views.index, name='index'),
 ]
 '''
+
+#urlpatterns += [
+#    path('catalog/dance_courses/', include('catalog.urls'))
+#]

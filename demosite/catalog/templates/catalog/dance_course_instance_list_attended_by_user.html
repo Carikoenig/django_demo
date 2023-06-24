@@ -3,18 +3,16 @@
 {% block content %}
     <h1>My booked courses</h1>
 
-    {% if dance_course_instance_list %}
+    {% if object_list %}
     <ul>
-      {% for inst in dance_course_instance_list %}
-      <li  class="{% if inst.running == 'o' %}text-success{% elif inst.running == 'f' %}text-danger{% else %}text-warning{% endif %}">
+      {% for inst in object_list %}
+      <li>
         <a href="{% url 'dance_course-detail' inst.dance_course.pk %}">{{ inst.dance_course.title }}</a> ({{ inst.start_date }})
-
       </li>
       {% endfor %}
     </ul>
 
     {% else %}
       <p>There exist no booked courses.</p>
-      <p> {{dance_course_instance_list}} </p>
     {% endif %}
 {% endblock %}

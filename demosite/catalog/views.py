@@ -105,6 +105,7 @@ class InstructorDetailView(generic.DetailView):
 
 
 
+
 class CoursesAttendedByUserListView(LoginRequiredMixin,generic.ListView):
     """Generic class-based view listing courses that current user booked."""
     model = Dance_course_instance
@@ -117,6 +118,8 @@ class CoursesAttendedByUserListView(LoginRequiredMixin,generic.ListView):
         for inst in Dance_course_instance.objects.all():
             if self.request.user.username in inst.display_attendees():
                 booked_courses_list.append(inst)
+        # debugging
+        # print(booked_courses_list)
 
         return booked_courses_list
             # many to many not iterable!! go via display_attendees function from models

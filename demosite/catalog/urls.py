@@ -13,5 +13,6 @@ urlpatterns = [
     path('dance_course/<int:pk>', views.Dance_courseDetailView.as_view(), name='dance_course-detail'),
     path('instructors/', views.InstructorListView.as_view(), name='instructor_list'),
     path('instructor/<slug>', views.InstructorDetailView.as_view(), name='instructor-detail'),
+    path('mycourses/', views.CoursesAttendedByUserListView.as_view(), name='my-courses'),
 
 ]

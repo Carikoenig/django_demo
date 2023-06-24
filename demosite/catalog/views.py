@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Dance_course, Instructor, Dance_course_instance, Style
 from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def index(request):
@@ -21,12 +22,18 @@ def index(request):
 
     # TODO courses with/ without partner
 
+    # Number of visits to this view, as counted in the session variable.
+    # Here we first get the value of the 'num_visits' session key, setting the value to 0 if it has not previously been set
+    num_visits = request.session.get('num_visits', 0)
+    request.session['num_visits'] = num_visits + 1
+
     context = {
         'num_Dance_courses': num_Dance_courses,
         'num_Dance_course_instances': num_Dance_course_instances,
         'num_instances_ongoing': num_instances_ongoing,
         'num_instructors': num_instructors,
-        'num_styles_with_letter' : num_styles_with_letter
+        'num_styles_with_letter' : num_styles_with_letter,
+        'num_visits': num_visits,
     }
 
     # Render the HTML template index.html with the data in the context variable
@@ -95,3 +102,22 @@ class InstructorListView(generic.ListView):
 class InstructorDetailView(generic.DetailView):
     model = Instructor
     paginate_by = 10
+
+
+
+class CoursesAttendedByUserListView(LoginRequiredMixin,generic.ListView):
+    """Generic class-based view listing courses that current user booked."""
+    model = Dance_course_instance
+    template_name = 'catalog/dance_course_instance_list_attended_by_user.html'
+    #paginate_by = 10
+
+    def get_queryset(self):
+
+        booked_courses_list = []
+        for inst in Dance_course_instance.objects.all():
+            if self.request.user.username in inst.display_attendees():
+                booked_courses_list.append(inst)
+
+        return booked_courses_list
+            # many to many not iterable!! go via display_attendees function from models
+            #Dance_course_instance.objects.filter(self.request.user.username in Dance_course_instance.display_attendees(..inst)).order_by('start_date')

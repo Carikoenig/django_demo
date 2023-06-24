@@ -51,13 +51,9 @@ urlpatterns = [
 
 """
 
-'''
-# should this maybe rather be in catalog/urls.py
-urlpatterns = [
-    path('', views.index, name='index'),
+# Add Django site authentication urls (for login, logout, password management)
+urlpatterns += [
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
-'''
-
-#urlpatterns += [
-#    path('catalog/dance_courses/', include('catalog.urls'))
-#]
+# The URLs (and implicitly, views) that we just added above expect to
+# find their associated templates in a directory /registration/ somewhere in the templates search path.

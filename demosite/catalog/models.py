@@ -3,6 +3,10 @@ from django.db import models
 from django.urls import reverse
 # Required for unique book instances
 import uuid
+from django.contrib.auth.models import User
+from datetime import date
+
+
 
 # Create your models here.
 
@@ -125,6 +129,19 @@ class Dance_course_instance(models.Model):
     )
 
     instructor = models.ManyToManyField('Instructor', help_text='Select instructor(s) for this dance course instance')
+    attendees = models.ManyToManyField(User, blank=True, help_text = 'Put in the Footloose members that attend this course')
+
+    @property
+    def is_accepting_new_participants(self):
+        """Determines if the course is still joinable. This is the case as long as the course isn't finished yet"""
+        return bool(self.running and self.running != 'f' )
+        # first verify whether running is empty before making a comparison.
+        # An empty running field would cause Django to throw an error instead of
+        #  showing the page: empty values are not comparable.
+
+        # TODO not only check for time, but also if spots are still left
+
+
 
     # TODO spot,  max_size, attending_students
 
@@ -140,6 +157,12 @@ class Dance_course_instance(models.Model):
         return dance_course_title
 
         display_dancecourse.short_description = 'Dance course title'
+
+    def display_attendees(self):
+        """Create a string for the attendee(s) attending this specific course. This is required to display this in Admin."""
+        return ', '.join(inst.username for inst in self.attendees.all()[:3])
+
+        display_instructor.short_description = 'Instructor(s)'
 
     class Meta:
         ordering = ['start_date']

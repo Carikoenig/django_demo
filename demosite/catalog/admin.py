@@ -38,13 +38,13 @@ class Dance_courseAdmin(admin.ModelAdmin):
 # Register the Admin classes for Dance_course_Instance using the decorator
 @admin.register(Dance_course_instance)
 class Dance_course_instanceAdmin(admin.ModelAdmin):
-    list_display = ('display_dancecourse', 'display_instructor', 'running', 'start_date')
+    list_display = ('display_dancecourse', 'display_instructor', 'running', 'start_date', 'display_attendees')
     list_filter = ('running', 'instructor')
     fieldsets = (
         (None, {
             'fields': ('dance_course', 'instructor')
         }),
         ('Runtime', {
-            'fields': ('start_date', 'running')
+            'fields': ('start_date', 'running', 'attendees')
         }),
     )

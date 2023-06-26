@@ -129,7 +129,7 @@ class CoursesAttendedByUserListView(LoginRequiredMixin,generic.ListView):
 
 
 class Dance_course_ParticipantsDetailView(PermissionRequiredMixin, generic.DetailView):
-    model = Dance_course
+    model = Dance_course_instance
     paginate_by = 3
     permission_required = 'acces_to_participants'
     template_name = 'catalog/dance_course_participants_detail.html'

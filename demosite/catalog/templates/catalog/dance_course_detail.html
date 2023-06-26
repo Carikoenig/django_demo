@@ -18,27 +18,19 @@
       <!-- This function is automatically created because Dance_course_instance.running
        is a choices field. Django automatically creates a method get_FOO_display() for every choices
         field "Foo" in a model, which can be used to get the current value of the field.   -->
-      {{ instance.get_running_display }}
-    </p>
-    {% if instance.running != 'o' %}
-        <p><strong>Start day:</strong> {{ instance.start_date }}</p>
-    {% else %}
-        <p><strong>Start day:</strong> {{ instance.start_date }}</p>
-    {% endif %}
+      {{ instance.get_running_display }}</p>
 
 
-
+    <strong>Start day:</strong> {{ instance.start_date }}<br>
+    <strong>Instructor:</strong> {{ instance.instructor.all|join:" , " }}<br>
     <!-- We can mark a BookInstance as returned. -->
     <!-- Perhaps add code to link to a "book return" view here. -->
     <!-- example for permissions based options -->
     {% if perms.catalog.acces_to_participants %}
-    <a href="{% url 'attending-students' instance.pk %}">Participants</a>
+    <a href="{% url 'attending-students' instance.pk %}">Participants</a><br>
     {% else %}
-     <p> Alter run status: you don't have permission with this user account</p>
+    <a href="{% url 'attending-students' instance.pk %}">Participants</a> (you don't have permission with this user account)<br>
     {% endif %}
-
-
-    <p><strong>Instructor:</strong> {{ instance.instructor.all|join:" , " }}</p>
     <p class="text-muted"><strong>Id:</strong> {{ instance.id }}</p>
   {% endfor %}
 </div>

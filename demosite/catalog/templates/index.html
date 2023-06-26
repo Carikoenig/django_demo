@@ -24,7 +24,11 @@
         {% for style in num_styles_with_letter %}
             <li>
               {{ style.name }}
-              {{style.partner_needed}}
+              {% if style.partner_needed == 'p' %}
+              (pair dance)
+              {% elif style.partner_needed == 's'%}
+              (solo dance)
+              {% endif %}
             </li>
             {% endfor %}
         </ul>

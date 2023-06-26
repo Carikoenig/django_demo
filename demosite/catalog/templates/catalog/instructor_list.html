@@ -1,9 +1,9 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>Instructor List</h1>
+  <h1>List of Instructors</h1>
   {% if instructor_list %}
-   <p> {{instructor_list}}</p>
+
   <!-- if dance_course_list doesn't work try object_list alias --->
     <ul>
       {% for inst in instructor_list %}

@@ -144,6 +144,8 @@ class Dance_course_instance(models.Model):
 
 
     # TODO spot,  max_size, attending_students
+    def get_absolute_url(self):
+        return reverse('attending-students', args=[str(self.pk)])
 
     def display_instructor(self):
         """Create a string for the instructor(s) teaching this specific course. This is required to display this in Admin."""

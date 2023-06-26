@@ -1,32 +1,26 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>Title: {{ dance_course.title }}</h1>
+  <h1>{{ dance_course_instance.dance_course.title }} </h1>
+  <h5> ID: {{ dance_course_instance.pk }} </h5>
 
-<p><strong>Cost:</strong> {{ dance_course.cost }}</p>
+<p><strong>Start date:</strong> {{dance_course_instance.start_date}} <br>
+    <strong>Cost:</strong> {{ dance_course_instance.dance_course.cost }} <br>
+    <strong>Instructor:</strong> {{ dance_course_instance.instructor.all|join:" ; " }}</p>
 
-<div style="margin-left:20px;margin-top:20px">
-  <h4>Specific Instances</h4>
+{% if dance_course_instance.display_attendees %}
+  <!-- This function is automatically created because Dance_course_instance.running
+   is a choices field. Django automatically creates a method get_FOO_display() for every choices
+    field "Foo" in a model, which can be used to get the current value of the field.   -->
 
-  {% for instance in dance_course.dance_course_instance_set.all %}
-    <hr />
-    <p
-      class="{% if instance.running == 'o' %}text-success{% elif instance.running == 'f' %}text-danger{% else %}text-warning{% endif %}">
+<br>
+ <h4><strong>Students:</strong></h4>
+ {{ dance_course_instance.display_attendees }}
 
-      <!-- This function is automatically created because Dance_course_instance.running
-       is a choices field. Django automatically creates a method get_FOO_display() for every choices
-        field "Foo" in a model, which can be used to get the current value of the field.   -->
-     <strong>Students:</strong> {{ instance.display_attendees }}
-    </p>
-    <!-- works as well...->>
-    <!--<p><strong>Students:</strong> {{ instance.attendees.all|join:", " }}</p>
-    -->
+{% else %}
+<p>No student booked this course.</p>
+{% endif %}
 
-
-    <p><strong>Instructor:</strong> {{ instance.instructor.all|join:" , " }}</p>
-    <p class="text-muted"><strong>Id:</strong> {{ instance.id }}</p>
-  {% endfor %}
-</div>
 {% endblock %}
 
 <!--- # interesting structure for displaying manytomany parameters

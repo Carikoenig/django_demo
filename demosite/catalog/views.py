@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Dance_course, Instructor, Dance_course_instance, Style
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 
 def index(request):
@@ -70,6 +71,7 @@ class Dance_courseListView(generic.ListView):
 class Dance_courseDetailView(generic.DetailView):
     model = Dance_course
     paginate_by = 3
+
     # Within the html template you can access the dance_course's
     # details with the template variable named object OR dance_course (i.e. generically "the_model_name").
     # canceld since didnt find this renaming:
@@ -124,3 +126,10 @@ class CoursesAttendedByUserListView(LoginRequiredMixin,generic.ListView):
         return booked_courses_list
             # many to many not iterable!! go via display_attendees function from models
             #Dance_course_instance.objects.filter(self.request.user.username in Dance_course_instance.display_attendees(..inst)).order_by('start_date')
+
+
+class Dance_course_ParticipantsDetailView(PermissionRequiredMixin, generic.DetailView):
+    model = Dance_course
+    paginate_by = 3
+    permission_required = 'acces_to_participants'
+    template_name = 'catalog/dance_course_participants_detail.html'

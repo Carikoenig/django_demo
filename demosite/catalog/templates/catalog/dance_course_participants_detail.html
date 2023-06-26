@@ -3,9 +3,6 @@
 {% block content %}
   <h1>Title: {{ dance_course.title }}</h1>
 
-
-<p><strong>Summary:</strong> {{ dance_course.summary }}</p>
-<p><strong>Style:</strong> {{ dance_course.style }}</p>
 <p><strong>Cost:</strong> {{ dance_course.cost }}</p>
 
 <div style="margin-left:20px;margin-top:20px">
@@ -15,27 +12,15 @@
     <hr />
     <p
       class="{% if instance.running == 'o' %}text-success{% elif instance.running == 'f' %}text-danger{% else %}text-warning{% endif %}">
+
       <!-- This function is automatically created because Dance_course_instance.running
        is a choices field. Django automatically creates a method get_FOO_display() for every choices
         field "Foo" in a model, which can be used to get the current value of the field.   -->
-      {{ instance.get_running_display }}
+     <strong>Students:</strong> {{ instance.display_attendees }}
     </p>
-    {% if instance.running != 'o' %}
-        <p><strong>Start day:</strong> {{ instance.start_date }}</p>
-    {% else %}
-        <p><strong>Start day:</strong> {{ instance.start_date }}</p>
-    {% endif %}
-
-
-
-    <!-- We can mark a BookInstance as returned. -->
-    <!-- Perhaps add code to link to a "book return" view here. -->
-    <!-- example for permissions based options -->
-    {% if perms.catalog.acces_to_participants %}
-    <a href="{% url 'attending-students' instance.pk %}">Participants</a>
-    {% else %}
-     <p> Alter run status: you don't have permission with this user account</p>
-    {% endif %}
+    <!-- works as well...->>
+    <!--<p><strong>Students:</strong> {{ instance.attendees.all|join:", " }}</p>
+    -->
 
 
     <p><strong>Instructor:</strong> {{ instance.instructor.all|join:" , " }}</p>

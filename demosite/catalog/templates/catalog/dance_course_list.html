@@ -5,7 +5,7 @@
   {% if dance_course_list %}
   <!-- if dance_course_list doesn't work try object_list alias --->
     <ul>
-      {% for course in dance_course_list %}
+          {% for course in dance_course_list %}
       <li>
         <a href="{{ course.get_absolute_url }}">{{ course.title }}</a>
         ({{course.cost}})

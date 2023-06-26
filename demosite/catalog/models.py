@@ -166,6 +166,8 @@ class Dance_course_instance(models.Model):
 
     class Meta:
         ordering = ['start_date']
+        # each permission itself being defined in a nested tuple containing the permission name and permission display value.
+        permissions = (("acces_to_participants", "access the attending participants"),)
 
     def __str__(self):
         """String for representing the Model object."""

@@ -14,5 +14,6 @@ urlpatterns = [
     path('instructors/', views.InstructorListView.as_view(), name='instructor_list'),
     path('instructor/<slug>', views.InstructorDetailView.as_view(), name='instructor-detail'),
     path('mycourses/', views.CoursesAttendedByUserListView.as_view(), name='my-courses'),
+    path('attending_students/<uuid:pk>', views.Dance_course_ParticipantsDetailView.as_view(), name='attending-students'),
 
 ]

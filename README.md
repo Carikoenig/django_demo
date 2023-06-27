@@ -1,5 +1,5 @@
 # django_demo
-A demo web application using django
+A demo web application using django, modeling the "Footloose" student dance associations course structure.
 
-Download UML: [Django_demo-UML-drawio.pdf](https://github.com/Carikoenig/django_demo/files/11880984/Django_demo-UML-drawio.pdf)
+
 
